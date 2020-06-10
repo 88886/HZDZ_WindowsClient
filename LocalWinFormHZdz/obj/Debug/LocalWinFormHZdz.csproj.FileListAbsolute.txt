@@ -38,3 +38,4 @@ G:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Debug\LocalWinFormHZdz.exe
 G:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Debug\LocalWinFormHZdz.pdb
 G:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\bin\Debug\Newtonsoft.Json.dll
 G:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Debug\LocalWinFormHZdz.csproj.CopyComplete
+d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Debug\LocalWinFormHZdz.EditProductForm.resources

@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("号子短租登录程序V1.0")]
+[assembly: AssemblyTitle("号子短租登录程序V1.1.5")]
 [assembly: AssemblyDescription("一个C#练手程序")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("JDS")]
 [assembly: AssemblyProduct("LocalWinFormHZdz")]
 [assembly: AssemblyCopyright("Copyright ©JDS 2020")]
-[assembly: AssemblyTrademark("null")]
+[assembly: AssemblyTrademark("嵇")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("046fa461-ab4b-4786-b5f4-9402f28e8aca")]
+[assembly: Guid("66666666-6666-6666-6666-666666666666")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.1.1")]
-[assembly: AssemblyFileVersion("1.1.3.0")]
+[assembly: AssemblyVersion("1.1.1.5")]
+[assembly: AssemblyFileVersion("1.1.5.0")]
 [assembly: NeutralResourcesLanguage("zh-Hans")]

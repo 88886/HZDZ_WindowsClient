@@ -38,6 +38,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.IconMin = new System.Windows.Forms.NotifyIcon(this.components);
+            this.RightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.nmslToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.RightMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LoginButton
@@ -110,6 +115,40 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // IconMin
+            // 
+            this.IconMin.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
+            this.IconMin.BalloonTipText = "nmsl";
+            this.IconMin.BalloonTipTitle = "nmsl";
+            this.IconMin.ContextMenuStrip = this.RightMenu;
+            this.IconMin.Icon = ((System.Drawing.Icon)(resources.GetObject("IconMin.Icon")));
+            this.IconMin.Text = "号子短租";
+            this.IconMin.DoubleClick += new System.EventHandler(this.IconMin_DoubleClick);
+            // 
+            // RightMenu
+            // 
+            this.RightMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nmslToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.RightMenu.Name = "RightMenu";
+            this.RightMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.RightMenu.Size = new System.Drawing.Size(95, 48);
+            this.RightMenu.Text = "test";
+            // 
+            // nmslToolStripMenuItem
+            // 
+            this.nmslToolStripMenuItem.Name = "nmslToolStripMenuItem";
+            this.nmslToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.nmslToolStripMenuItem.Text = "显示";
+            this.nmslToolStripMenuItem.Click += new System.EventHandler(this.nmslToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 22);
+            this.toolStripMenuItem1.Text = "退出";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // MainFormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -127,10 +166,12 @@
             this.MaximizeBox = false;
             this.Name = "MainFormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "号子短租V1.0";
+            this.Text = "号子短租V1.1.5";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.MainFormLogin_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainFormLogin_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainFormLogin_KeyUp);
+            this.RightMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +187,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem nmslToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        public System.Windows.Forms.NotifyIcon IconMin;
+        public System.Windows.Forms.ContextMenuStrip RightMenu;
     }
 }
 

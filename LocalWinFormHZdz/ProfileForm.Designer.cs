@@ -48,10 +48,18 @@
             this.OrderLabel = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.XUNLEILABEL = new System.Windows.Forms.LinkLabel();
             this.HZDZHOMEWEB = new System.Windows.Forms.LinkLabel();
             this.LendingTB = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.Category1 = new System.Windows.Forms.GroupBox();
+            this.CategoryInfo1 = new System.Windows.Forms.Label();
+            this.EditButton1 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.XUNLEILABEL = new System.Windows.Forms.LinkLabel();
+            this.IconMin = new System.Windows.Forms.NotifyIcon(this.components);
+            this.RightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.nmslToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.UserInfoGroup.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -59,6 +67,9 @@
             this.TodayGroupInfo.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.Category1.SuspendLayout();
+            this.RightMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // UserInfoGroup
@@ -136,6 +147,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -251,6 +263,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "租用中订单";
             // 
+            // XUNLEILABEL
+            // 
+            this.XUNLEILABEL.AutoSize = true;
+            this.XUNLEILABEL.Location = new System.Drawing.Point(16, 186);
+            this.XUNLEILABEL.Name = "XUNLEILABEL";
+            this.XUNLEILABEL.Size = new System.Drawing.Size(0, 12);
+            this.XUNLEILABEL.TabIndex = 2;
+            this.XUNLEILABEL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.XUNLEILABEL_LinkClicked);
+            // 
             // HZDZHOMEWEB
             // 
             this.HZDZHOMEWEB.AutoSize = true;
@@ -268,20 +289,86 @@
             this.LendingTB.Size = new System.Drawing.Size(0, 12);
             this.LendingTB.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.Category1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(288, 375);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "货架管理";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // Category1
+            // 
+            this.Category1.AutoSize = true;
+            this.Category1.Controls.Add(this.CategoryInfo1);
+            this.Category1.Controls.Add(this.EditButton1);
+            this.Category1.Location = new System.Drawing.Point(8, 3);
+            this.Category1.Name = "Category1";
+            this.Category1.Size = new System.Drawing.Size(277, 83);
+            this.Category1.TabIndex = 0;
+            this.Category1.TabStop = false;
+            this.Category1.Text = "货架1";
+            // 
+            // CategoryInfo1
+            // 
+            this.CategoryInfo1.AutoSize = true;
+            this.CategoryInfo1.Location = new System.Drawing.Point(7, 21);
+            this.CategoryInfo1.Name = "CategoryInfo1";
+            this.CategoryInfo1.Size = new System.Drawing.Size(0, 12);
+            this.CategoryInfo1.TabIndex = 1;
+            // 
+            // EditButton1
+            // 
+            this.EditButton1.Location = new System.Drawing.Point(196, 40);
+            this.EditButton1.Name = "EditButton1";
+            this.EditButton1.Size = new System.Drawing.Size(75, 23);
+            this.EditButton1.TabIndex = 0;
+            this.EditButton1.Text = "编辑";
+            this.EditButton1.UseVisualStyleBackColor = true;
+            this.EditButton1.Visible = false;
+            this.EditButton1.Click += new System.EventHandler(this.EditButton1_Click);
+            // 
             // timer2
             // 
             this.timer2.Enabled = true;
-            this.timer2.Interval = 100000;
+            this.timer2.Interval = 300000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // XUNLEILABEL
+            // IconMin
             // 
-            this.XUNLEILABEL.AutoSize = true;
-            this.XUNLEILABEL.Location = new System.Drawing.Point(16, 186);
-            this.XUNLEILABEL.Name = "XUNLEILABEL";
-            this.XUNLEILABEL.Size = new System.Drawing.Size(0, 12);
-            this.XUNLEILABEL.TabIndex = 2;
-            this.XUNLEILABEL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.XUNLEILABEL_LinkClicked);
+            this.IconMin.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
+            this.IconMin.BalloonTipText = "nmsl";
+            this.IconMin.BalloonTipTitle = "nmsl";
+            this.IconMin.ContextMenuStrip = this.RightMenu;
+            this.IconMin.Icon = ((System.Drawing.Icon)(resources.GetObject("IconMin.Icon")));
+            this.IconMin.Text = "号子短租";
+            this.IconMin.DoubleClick += new System.EventHandler(this.IconMin_DoubleClick);
+            // 
+            // RightMenu
+            // 
+            this.RightMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nmslToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.RightMenu.Name = "RightMenu";
+            this.RightMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.RightMenu.Size = new System.Drawing.Size(95, 48);
+            this.RightMenu.Text = "test";
+            // 
+            // nmslToolStripMenuItem
+            // 
+            this.nmslToolStripMenuItem.Name = "nmslToolStripMenuItem";
+            this.nmslToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.nmslToolStripMenuItem.Text = "显示";
+            this.nmslToolStripMenuItem.Click += new System.EventHandler(this.nmslToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 22);
+            this.toolStripMenuItem1.Text = "退出";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // ProfileForm
             // 
@@ -297,6 +384,7 @@
             this.Text = "号子短租-控制台";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProfileForm_FormClosed);
             this.Load += new System.EventHandler(this.ProfileForm_Load);
+            this.SizeChanged += new System.EventHandler(this.ProfileForm_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProfileForm_KeyDown);
             this.UserInfoGroup.ResumeLayout(false);
             this.UserInfoGroup.PerformLayout();
@@ -311,6 +399,11 @@
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.Category1.ResumeLayout(false);
+            this.Category1.PerformLayout();
+            this.RightMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -339,5 +432,13 @@
         private System.Windows.Forms.LinkLabel HZDZHOMEWEB;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.LinkLabel XUNLEILABEL;
+        private System.Windows.Forms.NotifyIcon IconMin;
+        private System.Windows.Forms.ContextMenuStrip RightMenu;
+        private System.Windows.Forms.ToolStripMenuItem nmslToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox Category1;
+        private System.Windows.Forms.Button EditButton1;
+        private System.Windows.Forms.Label CategoryInfo1;
     }
 }

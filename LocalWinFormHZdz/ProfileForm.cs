@@ -18,6 +18,7 @@ namespace LocalWinFormHZdz
 {
     public partial class ProfileForm : Form
     {
+        public static string goodid;
         public ProfileForm()
         {
             InitializeComponent();
@@ -28,17 +29,52 @@ namespace LocalWinFormHZdz
 
         }
 
-        private void ProfileForm_Load(object sender, EventArgs e)
+        public void ProfileForm_Load(object sender, EventArgs e)
         {
             MainMethodInterface MMI = new MainMethodInterface();
             Task<string[]> Tasks = Task.Factory.StartNew<string[]>(() => MMI.GetUserDetailInfo());
             Task<string[]> Tasks0 = Task.Factory.StartNew<string[]>(() => MMI.GetTodayOrderInfo());
             Task<string[]> Tasks1 = Task.Factory.StartNew<string[]>(() => MMI.GetUserWalletInfo());
             Task<ArrayList> Tasks2 = Task.Factory.StartNew<ArrayList>(() => MMI.GetEachOrderDetailsWithId());
+            Task<string[]> Tasks3 = Task.Factory.StartNew<string[]>(() => MMI.GetUserProductList());
             string[] UserInfoList = Tasks.Result;
             string[] OrderCountInfo = Tasks0.Result;
             string[] UserWalletInfo = Tasks1.Result;
+            string[] ProductInfo = Tasks3.Result;
             ArrayList LendingOrderInfo = Tasks2.Result;
+            if (ProductInfo != null)
+            {
+                string ProducStus, ProductClasName, ProductName;
+                //public string goodid;
+                ProducStus = ProductInfo[0];
+                ProductName = ProductInfo[1];
+                ProductClasName = ProductInfo[2];
+                goodid = ProductInfo[3];
+                switch (ProducStus)
+                {
+                    case "3":ProducStus = "出租中";
+                    break;
+                    case "2":ProducStus = "待出租";
+                        break;
+                    case "4":ProducStus = "密码待更新";
+                        break;
+                }
+                if (goodid == null)
+                {
+                    CategoryInfo1.Text = "您还没有上架商品.";
+                    EditButton1.Visible = false;
+                }
+                else
+                {
+                    if (ProducStus == "密码待更新")
+                    {
+                        EditButton1.Visible = true;
+                    }
+                    CategoryInfo1.Text += $"商品名称:{ProductName}\n\n状态:{ProducStus}\n\n规格:{ProductClasName}";
+                }
+                
+            }
+            
             if (LendingOrderInfo != null)
             {
                 string ShownTime, FullText;
@@ -119,7 +155,7 @@ namespace LocalWinFormHZdz
 
     private void ProfileForm_KeyDown(object sender, KeyEventArgs e)
     {
-
+            //MainFormLogin.
     }
 
     private void ProfileForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -151,6 +187,45 @@ namespace LocalWinFormHZdz
         private void XUNLEILABEL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://i.xunlei.com/xluser/login.html");
+        }
+
+        private void ProfileForm_SizeChanged(object sender, EventArgs e)
+        {
+            //MainFormLogin k = new MainFormLogin();
+            //k.MainFormLogin_SizeChanged(sender,e);
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                IconMin.Visible = true;
+                this.Hide();
+            }
+            //Debug.WriteLine(this.WindowState);
+        }
+
+        private void IconMin_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            IconMin.Visible = false;
+            //IconMin.Dispose();
+        }
+
+        private void nmslToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            IconMin.Visible = false;
+            //IconMin.Dispose();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void EditButton1_Click(object sender, EventArgs e)
+        {
+            EditProductForm EPF = new EditProductForm();
+            EPF.ShowDialog();
         }
     }
 }

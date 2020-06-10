@@ -133,5 +133,35 @@ namespace LocalWinFormHZdz
                 Application.Exit();
             }
         }
+
+        public void MainFormLogin_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                IconMin.Visible = true;
+                this.Hide();
+            }
+        }
+
+        public void IconMin_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            IconMin.Visible = false;
+            //IconMin.Dispose();
+        }
+
+        public void nmslToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            IconMin.Visible = false;
+            //IconMin.Dispose();
+        }
+
+        public void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

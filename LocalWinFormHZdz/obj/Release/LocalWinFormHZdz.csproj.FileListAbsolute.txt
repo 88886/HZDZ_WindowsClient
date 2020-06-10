@@ -21,3 +21,4 @@ d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Release\LocalWinFormHZdz.exe
 d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Release\LocalWinFormHZdz.pdb
 d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\bin\Release\LocalWinFormHZdz.exe.config
 d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Release\LocalWinFormHZdz.csprojAssemblyReference.cache
+d:\Desktop\LocalWinFormHZdz\LocalWinFormHZdz\obj\Release\LocalWinFormHZdz.EditProductForm.resources

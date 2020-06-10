@@ -12,8 +12,10 @@ using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Collections;
 using System.Configuration;
+using System.Diagnostics;
 /*2020年6月2日，0:53休息，下一步开发获取用户资料信息等功能，目前登录功能已开发完毕，晚安啊！*/
 /*2020年6月3日,2:34开发完毕,下一步进行本文件优化，进行异常处理捕获，晚安。*/
+/*2020年6月10日，16：36新增功能货架管理，至此最新版本为1.1.5,本人停止继续开发,项目结束.*/
 namespace LocalWinFormHZdz
 {
     struct HzWebApi
@@ -22,11 +24,14 @@ namespace LocalWinFormHZdz
         public const string AllOrderApiAddress = "http://m.idsdz.com/api/applet-order/workOrder/list";
         public const string WalletApiAddress = "http://m.idsdz.com/api/applet-user/income/info";//获取余额接口
         public const string UserDetailInfoApiAddress = "http://m.idsdz.com/api/applet-user/user/info";//用户详细信息
+        public const string UserShopProductApiAddress = "http://m.idsdz.com/api/applet-shop/workbench/shelflist";//货架管理
+        public const string UpdateProductApiAddress = "http://m.idsdz.com/api/applet-shop/workbench/updategoods";
         public static string Orderstatus;//订单状态
         public static string OrderApiAddress;
         public static string SuccessCookie;
         public static string TodayDetailApiAddress;
         public static string OrderDetailsApiAddress;
+        public static string ProductDetailsApiAddress;
     }
     public class MainMethodInterface
     {
@@ -34,8 +39,58 @@ namespace LocalWinFormHZdz
         {
           //
         }
-        //public delegate string[] FuncHandel();
-        //FuncHandel fh=new FuncHandel();
+        public void GetProductDetailsOutMethod(out JToken PostList, out string[] DetailInfoList,string ApiUrl)
+        {//获取一个商品的详细资料
+            JObject JBJ = GetHttpResponJson(ApiUrl);
+            JToken RSPCODE = JBJ["code"];
+            JToken RSData = JBJ["data"];
+            PostList = RSData;
+            string[] TestArray=new string[4];
+            if (RSPCODE.ToString() == "200")
+            {
+                PostList = RSData;
+                string Product_desc, Product_UserName, Product_UserPassword, Product_ExpireTime;
+                Product_desc = RSData["goodsName"].ToString();
+                Product_UserName = RSData["goodsUsername"].ToString();
+                Product_UserPassword = RSData["goodsPassword"].ToString();
+                Product_ExpireTime = RSData["expireTime"].ToString();
+                TestArray[0]= Product_desc;//商品名称
+                TestArray[1] = Product_UserName;//用户名
+                TestArray[2] = Product_UserPassword;//密码
+                TestArray[3] = Product_ExpireTime;//到期时间
+                DetailInfoList = TestArray;
+            }
+            else
+            {
+                PostList = null;
+                DetailInfoList = null;
+            }
+
+        }//获取货架商品详细信息
+        public string[] GetUserProductList()
+        {
+            Dictionary<string,string> ProductInfoDetails = new Dictionary<string,string>();
+            JObject JBJ = GetHttpResponJson(HzWebApi.UserShopProductApiAddress);
+            JToken RespCode = JBJ["code"];
+            if (RespCode.ToString() == "200")
+            {
+                string ProductStatus, ProductName, ProductClass, GoodId;
+                JToken RespData = JBJ["data"];
+                ProductStatus = RespData[0]["shelfStatus"].ToString();
+                ProductName = RespData[0]["shelfName"].ToString();
+                ProductClass = RespData[0]["specNames"].ToString();
+                GoodId = RespData[0]["goodsId"].ToString();
+                string[] ProductList = { ProductStatus, ProductName, ProductClass, GoodId };
+                return ProductList;
+            }
+            else
+            {
+                return null;
+            }
+            //JToken ts = JBJ["data"];
+            //MessageBox.Show(ts.ToString());
+           // return new string[3];
+        }//获取产品列表，但是我就只想获取一个。
         public ArrayList GetEachOrderDetailsWithId()//通过ID获取订单详情 返回一个字符串数组，可转换为Jobject格式
         {
             try
@@ -268,13 +323,10 @@ namespace LocalWinFormHZdz
         //POST方法获取
         public string[] PostHttpResponJson(string InputUrl, string UserName, string Password, string DefaultMethod = "POST")
         {
-            //System.Net.ServicePointManager.Expect100Continue = false;
             string ResponeResult;
             HttpWebRequest MainRequest = (HttpWebRequest)WebRequest.Create(InputUrl);
             MainRequest.Method = DefaultMethod;
             MainRequest.ContentType = "application/json;charset=UTF-8";
-            //MainRequest.KeepAlive = true;
-           // MainRequest.Accept = "application/json, text/plain, */*";
             JObject PostParJson = new JObject();
             PostParJson.Add("password",Password);
             PostParJson.Add("username", UserName);
@@ -310,6 +362,44 @@ namespace LocalWinFormHZdz
                 return Tester;
             }
             
+        }
+        public string PostHttp(JObject para,string InputUrl)
+        {
+            string ResponeResult, GetCookie;
+            GetCookie = HzWebApi.SuccessCookie;
+            HttpWebRequest MainRequest = (HttpWebRequest)WebRequest.Create(InputUrl);
+            MainRequest.Method = "POST";
+            MainRequest.ContentType = "application/json;charset=UTF-8";
+            MainRequest.Headers.Add("Cookie", $"token={GetCookie}");
+            MainRequest.Headers.Add("Authorization", $"Bearer {GetCookie}");
+            JObject PostParJson = new JObject();
+            //PostParJson.Add("nmsl","");
+            //JObject JsonStr = JObject.Parse(para);
+            //string jtest;
+            //jtest = JsonStr.ToString();
+            Debug.WriteLine(para);
+            byte[] JsonStrByte = Encoding.UTF8.GetBytes(para.ToString());
+            Stream STm = MainRequest.GetRequestStream();
+            STm.Write(JsonStrByte,0, JsonStrByte.Length);
+            STm.Close();
+            HttpWebResponse MainResponse = (HttpWebResponse)MainRequest.GetResponse();
+            Stream ResponeObject = MainResponse.GetResponseStream();
+            StreamReader MainReturnText = new StreamReader(ResponeObject, Encoding.UTF8);
+            ResponeResult = MainReturnText.ReadToEnd();
+            string Code, AccessToken, RefreshToken, Msg;
+            JObject JOBJ = JObject.Parse(ResponeResult);
+            JToken ReturnCode = JOBJ["code"];
+            Code = ReturnCode.ToString();
+            if (Code == "200")
+            {
+                string Result = JOBJ["msg"].ToString();
+                return Result;
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -52,9 +52,17 @@ namespace LocalWinFormHZdz
             //string FlagStr; 
             if (test == false)
             {
-                string TempStringVersion = @"当前版本：Version1.1.3
+                string TempStringVersion = @"当前版本：Version1.1.5
 #########
 版本更新记录:
+v1.1.5
+增加了编辑个人商品货架的功能
+#########
+v1.1.4
+增加了托盘图标
+修复了双击托盘显示窗口
+不正常的bug
+#########
 v1.1.3
 取消自动刷新功能，更改为自动注销重启登录
 增加了迅雷快捷密码快捷修改网址
